@@ -19,6 +19,29 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        
+        // Game Colors
+        'game-primary': "hsl(var(--game-primary))",
+        'game-primary-light': "hsl(var(--game-primary-light))",
+        'game-primary-dark': "hsl(var(--game-primary-dark))",
+        'game-secondary': "hsl(var(--game-secondary))",
+        'game-secondary-light': "hsl(var(--game-secondary-light))",
+        'game-accent': "hsl(var(--game-accent))",
+        'game-accent-light': "hsl(var(--game-accent-light))",
+        
+        // Educational Colors
+        'success': "hsl(var(--success))",
+        'success-light': "hsl(var(--success-light))",
+        'error': "hsl(var(--error))",
+        'error-light': "hsl(var(--error-light))",
+        'warning': "hsl(var(--warning))",
+        'info': "hsl(var(--info))",
+        
+        // Fraction Colors
+        'fraction-cake': "hsl(var(--fraction-cake))",
+        'fraction-laddu': "hsl(var(--fraction-laddu))",
+        'fraction-pizza': "hsl(var(--fraction-pizza))",
+        'fraction-plate': "hsl(var(--fraction-plate))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

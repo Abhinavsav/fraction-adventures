@@ -1,11 +1,13 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+// Fraction Quest - Educational Math Game
 
 const Index = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
       <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+        <h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-game-primary to-game-secondary bg-clip-text text-transparent">
+          Fraction Quest
+        </h1>
+        <p className="text-xl text-muted-foreground">Loading your math adventure...</p>
       </div>
     </div>
   );

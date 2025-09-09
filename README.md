@@ -1,73 +1,92 @@
-# Welcome to your Lovable project
+# Fraction Quest - Grades 6–12 Edition
 
-## Project info
+A production-quality React educational game that teaches fractions through interactive gameplay.
 
-**URL**: https://lovable.dev/projects/e493bf49-8d23-4c9c-b9b2-fbfe2d0f76fb
+## 🎮 Game Features
 
-## How can I edit this code?
+### 5 Progressive Levels
+1. **Sharing & Improper Fractions** - Learn to share items equally and understand mixed numbers
+2. **Fraction Addition & Subtraction** - Add and subtract fractions with visual models  
+3. **Equivalent Fractions & Simplification** - Recognize equivalent fractions and simplify
+4. **Mixed Numbers & Conversion** - Convert between improper fractions and mixed numbers
+5. **Applied Word Problems** - Solve real-world problems using fractions
 
-There are several ways of editing your application.
+### 🔧 Technical Features
+- **React 18** with TypeScript and Vite
+- **Custom drag & drop** with pointer events (touch + mouse support)
+- **Robust fraction mathematics** using integer arithmetic (no floating point errors)
+- **WebAudio sound engine** with feedback tones
+- **Accessibility support** with keyboard navigation and ARIA labels
+- **Responsive design** with Tailwind CSS
+- **Progressive difficulty** with adaptive scoring
 
-**Use Lovable**
+### 🎯 Educational Content
+- **Visual learning** with interactive cake/pizza/laddu pieces
+- **Real-world applications** like recipes and sharing scenarios
+- **Step-by-step hints** with visual guidance
+- **Progress tracking** with accuracy and time metrics
+- **Grade-appropriate problems** with tested examples
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e493bf49-8d23-4c9c-b9b2-fbfe2d0f76fb) and start prompting.
+## 🚀 Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:8080](http://localhost:8080) to play!
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🎨 Game Design
 
-**Use GitHub Codespaces**
+The game features a beautiful, educational-focused design system with:
+- Semantic color tokens for consistent theming
+- Smooth animations and transitions
+- Visual feedback for correct/incorrect answers
+- Progress indicators and achievement badges
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📱 Accessibility
 
-## What technologies are used for this project?
+- Full keyboard navigation support
+- Screen reader friendly with ARIA labels
+- High contrast colors for readability
+- Configurable sound and hint settings
+- Touch-friendly interface for tablets
 
-This project is built with:
+## 🧮 Math Validation
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+All fraction operations use integer arithmetic to ensure perfect accuracy:
+- GCD/LCM calculations for common denominators
+- Cross-multiplication for equivalence checking
+- Proper fraction reduction and mixed number conversion
+- Support for multiple answer formats (visual, numeric, text)
 
-## How can I deploy this project?
+## 🎵 Sound System
 
-Simply open [Lovable](https://lovable.dev/projects/e493bf49-8d23-4c9c-b9b2-fbfe2d0f76fb) and click on Share -> Publish.
+Simple WebAudio synthesizer provides:
+- Success/failure feedback tones
+- Level completion fanfares  
+- Background ambient music
+- Button click sounds
+- Configurable audio settings
 
-## Can I connect a custom domain to my Lovable project?
+## 📊 Analytics Ready
 
-Yes, you can!
+The game emits detailed analytics events for:
+- Problem attempts and results
+- Hint usage tracking
+- Time spent per level
+- Accuracy and progress metrics
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Perfect for integration with learning management systems or educational analytics platforms.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🧪 Testing
+
+Each level includes specific acceptance criteria:
+- Mathematical correctness validation
+- Visual interaction testing
+- Timer and scoring verification
+- Accessibility compliance checks
+
+---
+
+**Built with modern web technologies for engaging math education!** 🚀📚
