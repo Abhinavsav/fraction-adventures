@@ -21,6 +21,15 @@ const GameBoard: React.FC = () => {
   const [denominator, setDenominator] = useState<string>('');
   const [wholePart, setWholePart] = useState<string>('');
 
+  // Reset inputs when problem changes
+  React.useEffect(() => {
+    setPlayerAnswer('');
+    setNumerator('');
+    setDenominator('');
+    setWholePart('');
+    setShowHints(false);
+  }, [state.currentProblem?.id]);
+
   const currentProblem = state.currentProblem;
   const currentProgress = state.levelProgress.find(p => p.levelId === state.currentLevel);
 
@@ -61,11 +70,15 @@ const GameBoard: React.FC = () => {
 
     if (answer) {
       submitAnswer(answer);
-      // Reset inputs
-      setPlayerAnswer('');
-      setNumerator('');
-      setDenominator('');
-      setWholePart('');
+      // Generate next problem after a short delay
+      setTimeout(() => {
+        nextProblem();
+        // Reset inputs
+        setPlayerAnswer('');
+        setNumerator('');
+        setDenominator('');
+        setWholePart('');
+      }, 1500);
     }
   };
 
@@ -336,7 +349,7 @@ const GameBoard: React.FC = () => {
 
           <div className="text-center">
             <h1 className="text-2xl font-bold">Level {state.currentLevel}</h1>
-            <p className="text-gray-600">Problem {currentProgress?.attempts || 0 + 1} of 5</p>
+            <p className="text-gray-600">Problem {(currentProgress?.attempts || 0) + 1} of 5</p>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -391,7 +404,7 @@ const GameBoard: React.FC = () => {
                   <Button 
                     onClick={handleSubmitAnswer}
                     className="game-button bg-gradient-to-r from-game-primary to-game-secondary text-white"
-                    disabled={!numerator && !playerAnswer}
+                    disabled={(!numerator && !playerAnswer) || (!!numerator && !denominator)}
                   >
                     <CheckCircle className="w-4 h-4 mr-2" />
                     Submit Answer

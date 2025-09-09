@@ -118,7 +118,7 @@ export const FractionVisualizer: React.FC<FractionVisualizerProps> = ({
           className={`transition-all duration-300 ${
             interactive && isHighlighted ? 'fraction-piece cursor-grab hover:brightness-110' : ''
           }`}
-          onPointerDown={interactive && isHighlighted ? (e) => handlePointerDown(e, pieces[i]) : undefined}
+          onPointerDown={interactive && isHighlighted && pieces[i] ? (e) => handlePointerDown(e, pieces[i]) : undefined}
         />
       );
     }
@@ -154,7 +154,7 @@ export const FractionVisualizer: React.FC<FractionVisualizerProps> = ({
           className={`transition-all duration-300 ${
             interactive && isHighlighted ? 'fraction-piece cursor-grab hover:brightness-110' : ''
           }`}
-          onPointerDown={interactive && isHighlighted ? (e) => handlePointerDown(e, pieces[i]) : undefined}
+          onPointerDown={interactive && isHighlighted && pieces[i] ? (e) => handlePointerDown(e, pieces[i]) : undefined}
         />
       );
     }

@@ -117,7 +117,8 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         if (progress.levelId === action.levelId) {
           return {
             ...progress,
-            completed: true
+            completed: true,
+            timeSpent: state.timeRemaining > 0 ? LEVEL_CONFIGS.find(l => l.id === action.levelId)?.timeLimit! - state.timeRemaining : 0
           };
         }
         // Unlock next level
@@ -132,7 +133,8 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
       return {
         ...state,
-        levelProgress: completedProgress
+        levelProgress: completedProgress,
+        isPlaying: false // Stop playing to show completion screen
       };
 
     case 'TICK_TIMER':
@@ -250,13 +252,17 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 
     // Check level completion
     const currentProgress = state.levelProgress.find(p => p.levelId === state.currentLevel);
-    if (currentProgress && currentProgress.correctAnswers + (isCorrect ? 1 : 0) >= 5) {
-      dispatch({ type: 'LEVEL_COMPLETE', levelId: state.currentLevel });
-      toast({
-        title: "Level Complete! 🌟",
-        description: "Great job! Next level unlocked!",
-        variant: "default"
-      });
+    const newCorrectCount = currentProgress ? currentProgress.correctAnswers + (isCorrect ? 1 : 0) : (isCorrect ? 1 : 0);
+    
+    if (newCorrectCount >= 5) {
+      setTimeout(() => {
+        dispatch({ type: 'LEVEL_COMPLETE', levelId: state.currentLevel });
+        toast({
+          title: "Level Complete! 🌟",
+          description: "Great job! Next level unlocked!",
+          variant: "default"
+        });
+      }, 1000);
     }
   };
 
@@ -276,7 +282,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     
     const levelConfig = LEVEL_CONFIGS.find(l => l.id === state.currentLevel);
     if (levelConfig) {
-      const problem = levelConfig.problemGenerator(Date.now() + Math.random());
+      const problem = levelConfig.problemGenerator(Date.now() + Math.random() * 1000);
       dispatch({ type: 'LOAD_PROBLEM', problem });
     }
   };
