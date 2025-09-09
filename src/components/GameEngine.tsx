@@ -39,7 +39,8 @@ type GameAction =
   | { type: 'END_GAME' }
   | { type: 'UPDATE_SETTINGS'; settings: Partial<GameSettings> }
   | { type: 'TICK_TIMER' }
-  | { type: 'LEVEL_COMPLETE'; levelId: number };
+  | { type: 'LEVEL_COMPLETE'; levelId: number }
+  | { type: 'RESET_LEVEL'; levelId: number };
 
 const initialState: GameState = {
   currentLevel: 0,
@@ -75,6 +76,16 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'SELECT_LEVEL':
       const levelConfig = LEVEL_CONFIGS.find(l => l.id === action.levelId);
+      
+      // Level 0 means level selection screen
+      if (action.levelId === 0) {
+        return {
+          ...state,
+          currentLevel: 0,
+          isPlaying: true
+        };
+      }
+      
       if (!levelConfig) return state;
 
       const isUnlocked = state.levelProgress.find(p => p.levelId === action.levelId)?.unlocked;
@@ -133,8 +144,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
       return {
         ...state,
-        levelProgress: completedProgress,
-        isPlaying: false // Stop playing to show completion screen
+        levelProgress: completedProgress
       };
 
     case 'TICK_TIMER':
@@ -147,6 +157,16 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         gameSettings: { ...state.gameSettings, ...action.settings }
+      };
+
+    case 'RESET_LEVEL':
+      return {
+        ...state,
+        levelProgress: state.levelProgress.map(progress => 
+          progress.levelId === action.levelId 
+            ? { ...progress, completed: false, attempts: 0, correctAnswers: 0 }
+            : progress
+        )
       };
 
     case 'END_GAME':
@@ -189,6 +209,8 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 
   const startGame = () => {
     dispatch({ type: 'START_GAME' });
+    // Navigate to level selection
+    dispatch({ type: 'SELECT_LEVEL', levelId: 0 });
     emitAnalytics({
       type: 'game_start',
       timestamp: Date.now(),
@@ -199,17 +221,22 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const selectLevel = (levelId: number) => {
     dispatch({ type: 'SELECT_LEVEL', levelId });
     
-    // Generate first problem
-    const levelConfig = LEVEL_CONFIGS.find(l => l.id === levelId);
-    if (levelConfig) {
-      const problem = levelConfig.problemGenerator(Date.now());
-      dispatch({ type: 'LOAD_PROBLEM', problem });
+    // Only generate problems for actual game levels (not level selection)
+    if (levelId > 0) {
+      // Reset level progress when starting
+      dispatch({ type: 'RESET_LEVEL', levelId });
       
-      emitAnalytics({
-        type: 'level_start',
-        timestamp: Date.now(),
-        data: { levelId, problemId: problem.id }
-      });
+      const levelConfig = LEVEL_CONFIGS.find(l => l.id === levelId);
+      if (levelConfig) {
+        const problem = levelConfig.problemGenerator(Date.now());
+        dispatch({ type: 'LOAD_PROBLEM', problem });
+        
+        emitAnalytics({
+          type: 'level_start',
+          timestamp: Date.now(),
+          data: { levelId, problemId: problem.id }
+        });
+      }
     }
   };
 

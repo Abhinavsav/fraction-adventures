@@ -17,7 +17,7 @@ const GameApp: React.FC = () => {
   
   // Check if current level is completed
   const currentProgress = state.levelProgress.find(p => p.levelId === state.currentLevel);
-  const isLevelComplete = currentProgress?.completed && state.currentLevel > 0;
+  const isLevelComplete = currentProgress?.completed && currentProgress?.correctAnswers >= 5;
   
   if (!state.isPlaying) {
     return <StartScreen />;

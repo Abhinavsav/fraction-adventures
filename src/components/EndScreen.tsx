@@ -133,7 +133,7 @@ const EndScreen: React.FC<EndScreenProps> = ({
 
             <Button
               variant="outline"
-              onClick={endGame}
+              onClick={() => selectLevel(0)} // Go to level selection
               className="flex items-center space-x-2"
             >
               <Home className="w-4 h-4" />
@@ -171,7 +171,7 @@ const EndScreen: React.FC<EndScreenProps> = ({
               You've mastered all levels of Fraction Quest! You're now a fraction expert!
             </p>
             <Button
-              onClick={endGame}
+              onClick={() => selectLevel(0)} // Go to level selection
               className="game-button bg-gradient-to-r from-yellow-500 to-orange-500 text-white"
             >
               Return to Start
